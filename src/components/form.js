@@ -23,13 +23,14 @@ export default class Form extends React.Component {
     render() {
         var panelStyle = {
             'max-width': '80%',
-            margin: '0 auto'
+            margin: '0 auto',
+
         }
         return (
             <div style={panelStyle}>
                
                <form onSubmit={this.handleSubmit}>
-        <label >Enter number</label>
+        <label id="name">Enter number</label>
         <input id="username" name="number" type="text" />
 
         <label >Enter Image</label>

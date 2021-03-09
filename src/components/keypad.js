@@ -5,6 +5,10 @@ export default class Keypad extends React.Component{
         this.props.buttonPressed(e.target.name);
 
     }
+    findname=()=>{
+        this.props.findname();
+        
+    }
 
     render() {
         var indents = [];
@@ -18,9 +22,9 @@ for (var i = 0; i < 10; i++) {
                     {indents}
                 
 
-
+                    <button name="CE" onClick={this.buttonPressed}>CE</button>
+                    <button name="Find" onClick={this.findname}>Submit</button>
                 
-                <button style={{width:300}}name="CE" onClick={this.buttonPressed}>CE</button>
                
             </div>
         );

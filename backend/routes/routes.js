@@ -39,6 +39,49 @@ router.post('/add',(req,res)=>{
   myArray[t]=req.body.image;
   
 })
+router.post('/findname',(req,res)=>{
+  console.log("on serverside");
+  console.log(req.body.number);
+ var t=req.body.number;
+ 
+ /*          0    1    2      3     4     5     6    7      8    9                    */
+ var key = ["","abc","def", "ghi","jkl","mno","pqr","stu","vwx","yz"];
+ var list =["batman","thor","spiderman","hulk","caption","hulk","deadpool","thanos","aquaman","darkseid","catwoman","vision","thor","joker","deadpool","antman","blur","*","0","#"];
+var arr = [];
+
+var array=[];
+var n=t.length;
+
+function permutation(i,str){
+if(i==n){
+array.push(str);
+  return;
+}
+console.log(i);
+var p=parseInt(t[i]);
+var x=key[p].length;
+console.log(p);
+for(let j=0;j<x;j++){
+ 
+ console.log(i);
+  permutation(i+1,str+key[p][j]);
+}
+
+}
+
+permutation(0,"")
+  console.log(array);
+  for(var j=0;j<array.length;j++){
+    if(list.indexOf(array[j])>-1){
+      console.log(array[j]);
+      res.send(array[j]);
+      return;
+    }
+  }
+  res.send("-1");
+  
+})
+
   
 
 module.exports=router

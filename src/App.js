@@ -6,11 +6,13 @@ import Output from "./components/output";
 import Send   from   "./components/send";
 import Image   from   "./components/image";
 import Form   from   "./components/form";
+import Name   from   "./components/name";
 
 class App extends Component {
   state={
-    result:" ",
-    image: ""
+    result:"",
+    image: "",
+    name:"No Superhero found for this number"
   }
   buttonPressed=buttonName=>{
     if(buttonName === "CE"){
@@ -49,6 +51,26 @@ class App extends Component {
 
 
   };
+  findname=()=>{
+    console.log("request send from frontend");
+    axios.post('http://localhost:4585/findname', 
+    {number:this.state.result}
+  ).then((res)=>{
+      if(res.data!=-1){
+        this.setState({
+          name:res.data
+        });
+      }
+      else{
+        this.setState({
+          name:"No Superhero found for this number"
+        });
+      }
+     
+  })
+
+}
+  
 
   backspace = () => {
     this.setState({
@@ -64,15 +86,15 @@ class App extends Component {
       <div className="App">
         
         <Output result={this.state.result} />
-        <Send   fetchthis={this.fetchthis} result={this.state.result}/>
-        <Keypad buttonPressed={this.buttonPressed}/>
+        <Send   fetchthis={this.fetchthis}  result={this.state.result}/>
+        <Keypad buttonPressed={this.buttonPressed} findname={this.findname}/>
         <Image  image={this.state.image}/>
         <br></br>
         <br></br>
         <br></br>
 
         <Form   form={this.formdata} />
-        
+        <Name   name={this.state.name}/>
 
       </div>
     );
