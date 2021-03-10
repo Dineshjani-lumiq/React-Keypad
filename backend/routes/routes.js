@@ -38,6 +38,7 @@ router.post('/add',(req,res)=>{
   
   myArray[t]=req.body.image;
   
+  
 })
 router.post('/findname',(req,res)=>{
   console.log("on serverside");
@@ -47,20 +48,28 @@ router.post('/findname',(req,res)=>{
  /*          0    1    2      3     4     5     6    7      8    9                    */
  var key = ["","abc","def", "ghi","jkl","mno","pqr","stu","vwx","yz"];
  var list =["batman","thor","spiderman","hulk","caption","hulk","deadpool","thanos","aquaman","darkseid","catwoman","vision","thor","joker","deadpool","antman","blur","*","0","#"];
-var arr = [];
 
-var array=[];
+
+
 var n=t.length;
-
+var flag=1;
+/* recursion    */
 function permutation(i,str){
 if(i==n){
-array.push(str);
+  /*  if string persent in list then send this string */
+  if(list.indexOf(str)>-1){
+   flag=0;
+    res.send(str);
+    return;
+  }
   return;
 }
 console.log(i);
+/* convert integer to that string char*/
 var p=parseInt(t[i]);
 var x=key[p].length;
 console.log(p);
+/* recursion go to next index and add char to string*/
 for(let j=0;j<x;j++){
  
  console.log(i);
@@ -70,15 +79,9 @@ for(let j=0;j<x;j++){
 }
 
 permutation(0,"")
-  console.log(array);
-  for(var j=0;j<array.length;j++){
-    if(list.indexOf(array[j])>-1){
-      console.log(array[j]);
-      res.send(array[j]);
-      return;
-    }
-  }
-  res.send("-1");
+  
+  if(flag==1){
+  res.send("-1");}
   
 })
 

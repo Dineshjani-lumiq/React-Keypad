@@ -93,7 +93,7 @@ class App extends Component {
         <br></br>
         <br></br>
 
-        <Form   form={this.formdata} />
+
         <Name   name={this.state.name}/>
 
       </div>

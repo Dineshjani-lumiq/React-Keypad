@@ -1,30 +1,16 @@
 .result {
   height: 60px;
-  background-color: #bbb;
+  /*background-color: #bbb;*/
   width: 100%;
 }
 
 .result p {
   font-size: 40px;
-  margin: 5px;
+  margin: 500px !important;
 
 }
-.Logo {
-  background-image: url(https://homepages.cae.wisc.edu/~ece533/images/airplane.png);
-}
-.calculator-body {
-  max-width: 400px;
-  margin: auto;
-}
 
-.button {
-  display: block;
-  background-color: #bbb;
-  width: 450px;
-}
 
-button {
-  width: 33.3%;
-  height: 60px;
-  font-size: 30px;
-}
+
+
+

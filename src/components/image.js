@@ -1,5 +1,8 @@
 import React from 'react' ;
 import logo from './logo.png';
+import './button.css'
+
+
 export default class Image extends React.Component {
     
     render() {
@@ -7,9 +10,9 @@ export default class Image extends React.Component {
         
 
         return (
-            <div>
+            <div className="h">
                
-                   {this.props.image==""&&<h>No superhero Here</h>}
+                   {this.props.image==""&&<h >No superhero Here</h>}
                
               
                   {this.props.image!==""&&<img src={this.props.image} />}

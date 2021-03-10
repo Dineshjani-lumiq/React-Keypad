@@ -1,4 +1,5 @@
 import React from 'react' ;
+import './button.css'
 
 export default class Output extends React.Component {
     
@@ -6,7 +7,7 @@ export default class Output extends React.Component {
 
         return (
             <div>
-                <p>{this.props.result}</p>
+                <p className="para">{this.props.result}</p>
             
             </div>
    

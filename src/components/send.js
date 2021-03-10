@@ -1,4 +1,5 @@
 import React from 'react' ;
+import './button.css'
 
 export default class Send extends React.Component {
     fetchthis=()=>{
@@ -15,7 +16,7 @@ export default class Send extends React.Component {
            
             <div>
                 
-                <button style={myStyle}  onClick={this.fetchthis}>Send</button>
+                <button className="action" style={myStyle}  onClick={this.fetchthis}>Send</button>
             </div>
    
         )

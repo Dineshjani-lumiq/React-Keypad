@@ -1,5 +1,12 @@
 import axios from 'axios';
 import React from 'react' ;
+import './button.css';
+
+
+import { useHistory } from "react-router-dom";
+import { Link } from 'react-router-dom';
+
+import  { Redirect } from 'react-router-dom'
 
 export default class Form extends React.Component {
     handleSubmit=(event)=> {
@@ -17,7 +24,13 @@ export default class Form extends React.Component {
           image:value}
         ).then((res)=>{
             console.log(res);
+           
+            <Redirect from="add" to={"/"}/> 
+            
         })
+       
+
+
       }
     
     render() {
@@ -27,19 +40,19 @@ export default class Form extends React.Component {
 
         }
         return (
-            <div style={panelStyle}>
+            <div className="form">
                
-               <form onSubmit={this.handleSubmit}>
-        <label id="name">Enter number</label>
-        <input id="username" name="number" type="text" />
+               <form  onSubmit={this.handleSubmit}>
+        <label className="label"id="name">Enter Number</label>
+        <input className="inputn" id="username" name="number" type="number" />
 
-        <label >Enter Image</label>
-        <input id="email" name="image" type="string" />
+        <label className="label">Enter Image</label>
+        <input className="input" id="email" name="image" type="url" />
 
         
         
 
-        <button variant="default" style={{ color: "white", background: "silver",width:100,padding: 8,margin: 0}}>Add </button>
+        <button className="action1" variant="default" >Add </button>
       </form>
             </div>
    
