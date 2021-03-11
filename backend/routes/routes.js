@@ -1,29 +1,47 @@
 const express =require('express');
 const router=express.Router();
 const  sticker=require('../models/models.js')
-var myArray = {1:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoq-8KwQec6KnDmUBfFpne8jXpsIKE87sGvA&usqp=CAU",2:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThb2bhKZo1mc0SloD3nySgMPZIz1ON2d_ejQ&usqp=CAU" ,3:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNv5uuTgKDuryWeUxqRfsBWfC0O-Ddrql31g&usqp=CAU"};
-          
+/*var myArray = {1:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoq-8KwQec6KnDmUBfFpne8jXpsIKE87sGvA&usqp=CAU",2:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThb2bhKZo1mc0SloD3nySgMPZIz1ON2d_ejQ&usqp=CAU" ,3:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNv5uuTgKDuryWeUxqRfsBWfC0O-Ddrql31g&usqp=CAU"};
+          */
 router.post('/find',(req,res)=>{
+  console.log(req.body.p);
+  var p=req.body.p;
   
-          var num=req.body.p;
-          console.log(num);
 
-          
-         
+  sticker.find({id:p},function(err,ans){
+    
+    if(err){
+      res.status(201).json({
+        message: 'error in finding this id !'
+      });
+    }
+    else{
+     
+      res.send(ans);
+    }
 
-//sticker.find({id:num},function(err,ans){
-    //if(err){
-      //return  res.send('error in fetching content');}
+  })
+  
+})
 
- //return res.send(ans);
+router.post('/list',(req,res)=>{
+  
+        /*  var num=req.body.p;
+          console.log(num); */
 
- //console.log(typeof(num));
+sticker.find({},function(err,ans){
+    if(err){
+    return  res.send('error in fetching content');}
+
+ return res.send(ans);
+
+ console.log(typeof(num));
  
- 
+ /*
  res.status(200).send({
    message:myArray[parseInt(num)]
  });
- 
+ */
  return;
  
  
@@ -32,18 +50,50 @@ router.post('/find',(req,res)=>{
 
 
 })
+})
 router.post('/add',(req,res)=>{
-  console.log(req.body.number);
+  /*console.log(req.body.number);
   var t=parseInt(req.body.number)
   
   myArray[t]=req.body.image;
-  
-  
+  */
+  const Sticker = new sticker({
+    id: req.body.number,
+    sticker: req.body.image
+  });
+  Sticker.save().then(
+    () => {
+      res.status(201).json({
+        message: 'User added successfully!'
+      });
+    }
+  ).catch(
+    (error) => {
+      res.status(500).json({
+        error: error
+      });
+    })
+}) 
+router.delete('/delete',(req,res)=>{
+  console.log(typeof(req.body.number));
+  var p=parseInt(req.body.number);
+  sticker.deleteOne({id:p},function(err){
+    if(err){
+      res.status(201).json({
+        message: 'error in deleting this id !'
+      });}
+      else{
+        res.status(201).json({
+          message: 'deleted successfully!'
+        });
+      }
+    
+  })
 })
 router.post('/findname',(req,res)=>{
   console.log("on serverside");
   console.log(req.body.number);
- var t=req.body.number;
+ var t=req.body.number;    
  
  /*          0    1    2      3     4     5     6    7      8    9                    */
  var key = ["","abc","def", "ghi","jkl","mno","pqr","stu","vwx","yz"];
@@ -84,6 +134,7 @@ permutation(0,"")
   res.send("-1");}
   
 })
+
 
   
 

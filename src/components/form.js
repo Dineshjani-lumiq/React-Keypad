@@ -9,6 +9,9 @@ import { Link } from 'react-router-dom';
 import  { Redirect } from 'react-router-dom'
 
 export default class Form extends React.Component {
+  state={
+    message:""
+  }
     handleSubmit=(event)=> {
         event.preventDefault();
         
@@ -24,7 +27,9 @@ export default class Form extends React.Component {
           image:value}
         ).then((res)=>{
             console.log(res);
-           
+            this.setState({
+              message:res.data.message
+            });
             <Redirect from="add" to={"/"}/> 
             
         })
@@ -54,6 +59,7 @@ export default class Form extends React.Component {
 
         <button className="action1" variant="default" >Add </button>
       </form>
+      <h>{this.state.message}</h>
             </div>
    
         )

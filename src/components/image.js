@@ -12,7 +12,7 @@ export default class Image extends React.Component {
         return (
             <div className="h">
                
-                   {this.props.image==""&&<h >No superhero Here</h>}
+                   {this.props.image==""&&<h style={{fontSize: "28px"}}>No superhero Here</h>}
                
               
                   {this.props.image!==""&&<img src={this.props.image} />}

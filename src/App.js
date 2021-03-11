@@ -30,7 +30,7 @@ class App extends Component {
      axios.post('http://localhost:4585/find',{p})
       .then(res => {
        
-       if (res.data.message==undefined) {
+       if (res.data.message=="error in finding this id !") {
           this.setState({
             image:""
           });
@@ -38,14 +38,14 @@ class App extends Component {
         
       
         else{
-          var q=res.data.message;
+          var q=res.data[0].sticker;
           
           this.setState({
             image:q
           });
         }
 
-        console.log(res.data.message);
+       
       })
       
 
