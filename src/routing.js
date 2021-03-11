@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-
+import './components/button.css';
 import App from "./App";
 import Form   from   "./components/form";
 import List from "./components/list";
 import Delete from "./components/delete";
+import Update from "./components/update";
 import {BrowserRouter as Router,Route,Switch,Link} from 'react-router-dom';
 
 export default class Routing extends Component {
@@ -12,7 +13,7 @@ export default class Routing extends Component {
 
         return (
             <Router>
-            <div>
+            <div className="topanv">
             <ul className="App-header"> 
               <li> 
                 <Link to="/">Home</Link> 
@@ -22,6 +23,7 @@ export default class Routing extends Component {
               </li> 
              <li><Link to="/list">All List</Link> </li>
              <li><Link to="/delete">Delete</Link> </li>
+             <li><Link to="/update">Update</Link> </li>
             </ul> 
                <Switch>
 <Route exact path="/"  component={  App} />
@@ -30,6 +32,7 @@ export default class Routing extends Component {
 
 <Route exact path="/list"  component={List} />
 <Route exact path="/delete"  component={Delete} />
+<Route exact path="/update"  component={Update} />
 
                </Switch>
             

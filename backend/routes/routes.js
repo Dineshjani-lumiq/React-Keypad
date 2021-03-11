@@ -10,14 +10,17 @@ router.post('/find',(req,res)=>{
 
   sticker.find({id:p},function(err,ans){
     
-    if(err){
+    if(err||ans.length==0){
       res.status(201).json({
-        message: 'error in finding this id !'
+        message: 'error'
       });
     }
     else{
      
-      res.send(ans);
+      res.send({
+        message:"receiving data",
+        data:ans
+      });
     }
 
   })
@@ -76,8 +79,16 @@ router.post('/add',(req,res)=>{
 }) 
 router.delete('/delete',(req,res)=>{
   console.log(typeof(req.body.number));
-  var p=parseInt(req.body.number);
-  sticker.deleteOne({id:p},function(err){
+  var p=req.body.number;
+  sticker.find({id:p},function(err,ans){
+    
+    if(ans.length==0||err){
+      res.status(201).json({
+        message: 'Not Present in Database'
+      });
+    }
+    else{
+  sticker.deleteMany({id:p},function(err){
     if(err){
       res.status(201).json({
         message: 'error in deleting this id !'
@@ -87,8 +98,39 @@ router.delete('/delete',(req,res)=>{
           message: 'deleted successfully!'
         });
       }
-    
+  
   })
+}
+})
+})
+router.put('/update',(req,res)=>{
+  console.log(req);
+  console.log(typeof(req.body.number));
+  var p=req.body.data.number;
+  var image=req.body.data.image;
+  sticker.find({id:p},function(err,ans){
+    
+    if(ans.length==0||err){
+      res.status(201).json({
+        message: 'Not Present in Database'
+      });
+    }
+    else{
+      sticker.updateOne({id:p},{$set:{sticker:image}},function(err){
+    if(err){
+      res.status(201).json({
+        message: 'error in updating this id !'
+      });}
+      else{
+        res.status(201).json({
+          message: 'updated successfully!'
+        });
+      }
+  
+  })
+}
+})
+  
 })
 router.post('/findname',(req,res)=>{
   console.log("on serverside");

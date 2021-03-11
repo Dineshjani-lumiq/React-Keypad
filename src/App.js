@@ -29,8 +29,8 @@ class App extends Component {
     /*    yha pe fetch karunga is result ke accoding ki ye id bhejunga or mujhe image url chhaiye */ 
      axios.post('http://localhost:4585/find',{p})
       .then(res => {
-       
-       if (res.data.message=="error in finding this id !") {
+       console.log(res);
+       if (res.data.message=="error") {
           this.setState({
             image:""
           });
@@ -38,8 +38,8 @@ class App extends Component {
         
       
         else{
-          var q=res.data[0].sticker;
-          
+          var q=res.data.data[0].sticker;
+         
           this.setState({
             image:q
           });
