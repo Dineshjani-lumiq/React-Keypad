@@ -18,10 +18,9 @@ export default class Form extends React.Component {
         const data = new FormData(event.target);
        
         const value = data.get('image');
-        console.log(value);
+        
         const value1 = data.get('number');
-        console.log(value1);
-  console.log({ value });
+    
   axios.put('http://localhost:4585/update', 
          
   {data:{number:value1,image:value}}
@@ -32,6 +31,7 @@ export default class Form extends React.Component {
       });
       
       
+
   })
        
 

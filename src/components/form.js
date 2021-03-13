@@ -30,8 +30,8 @@ export default class Form extends React.Component {
             this.setState({
               message:res.data.message
             });
-            <Redirect from="add" to={"/"}/> 
-            
+            <Redirect to={"/"}/> 
+            this.props.history.push('/');
         })
        
 
