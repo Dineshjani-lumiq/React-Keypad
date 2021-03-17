@@ -19,7 +19,7 @@ router.post('/list',databaseController.list);
 router.post('/add', databaseController.add);
 router.delete('/delete',databaseController.delete);
 router.post('/update',databaseController.put);
-
+router.post('/pagination',homeController.pagination);
 
 
 

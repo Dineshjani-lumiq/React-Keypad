@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+
+
+
 import './components/button.css';
 import App from "./App";
 import Form   from   "./components/form";
@@ -16,12 +19,12 @@ export default class Routing extends Component {
             <div className="topanv">
             <ul className="App-header"> 
               <li> 
-                <Link style={{paddingLeft:8, textDecoration: 'inherit', color: 'inherit'}} to="/">Home</Link> 
+                <Link style={{paddingLeft:8, textDecoration: 'inherit', color: 'inherit' ,color:'brown'}} to="/">Home</Link> 
               </li> 
-            
-             <li><Link style={{paddingLeft:8, textDecoration: 'inherit', color: 'inherit'
+           
+             <li><Link style={{paddingLeft:8, textDecoration: 'inherit', color: 'inherit',color:'blue'
    }} to="/list">All List</Link> </li>
-             <li><Link style={{paddingLeft:8,textDecoration: 'inherit', color: 'inherit'}} to="/add">Add</Link> </li>
+             <li><Link style={{paddingLeft:8,textDecoration: 'inherit', color: 'inherit',color: 'green' }} to="/add">Add</Link> </li>
 
             </ul> 
                <Switch>

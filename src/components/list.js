@@ -8,17 +8,26 @@ import axios from 'axios';
 export default class List extends React.Component {
     state={
         indents : [],
-         change:0,
+         
+         currentpage:1,
+         imageperpage:3
          
 
     }
- 
+ handleClick=(event)=>{
+   console.log(this.state.indents.length);
+   console.log("handler");
+   this.setState({currentpage:Number(event.target.id)});
+   this.fetchlist();
+       
+       
+ }
 
    deletecall=(e)=>{
       
       
        
- console.log(e.target.value);
+ 
         axios.delete('http://localhost:4123/delete', 
          
         {data:{name:e.target.value}}
@@ -79,9 +88,11 @@ message:res.data.message
         this.setState({
             indents:[]
             })
-        axios.post('http://localhost:4123/list').then((res)=>{
+        axios.post('http://localhost:4123/pagination', 
+         
+        {data:this.state.currentpage}).then((res)=>{
           
-          let p=res.data.length;
+          let p=res.data.data.length;
 
 const divStyle = {
     margin: '40px',
@@ -93,19 +104,19 @@ const divStyle = {
              
 
               this.setState({
-                indents:this.state.indents.concat(<div  className="divstyle" style={divStyle}> <h className="a1">{res.data[i].name}</h> <img className="a2" style={{
+                indents:this.state.indents.concat(<div  className="divstyle" style={divStyle}> <h className="a1">{res.data.data[i].name}</h> <img className="a2" style={{
                    
                     height: 150,
                     width: 150,
                     marginLeft:200
                   }}
-        src={res.data[i].sticker} alt="Logo" />
-        <button className="a3" value={res.data[i].name} onClick={this.deletecall}>Delete</button>
+        src={res.data.data[i].sticker} alt="Logo" />
+        <button className="a3" value={res.data.data[i].name} onClick={this.deletecall}>Delete</button>
          <Link  to={{
       pathname: '/add',
       Properties: {
-       Name:res.data[i].name,
-       Image:res.data[i].sticker
+       Name:res.data.data[i].name,
+       Image:res.data.data[i].sticker
       }
    }}>
      <button className="a4" type="button">
@@ -134,19 +145,33 @@ const divStyle = {
  
   
     render() {
-        
-        
+       var p=this.state.length;
+       const pageNumbers = [];
+       for (let i = 1; i <= Math.ceil(3); i++) {
+         pageNumbers.push(i);
+       }  
+       const renderPageNumbers = pageNumbers.map(number => {
+        return (
+          <li
+            key={number}
+            id={number}
+            onClick={this.handleClick}
+          >
+            {number}
+          </li>
+        );
+      });
 
         return (
-            <div className>
-              
-               
-               
-     
-                {this.state.indents}  
-            
-            </div>
-   
+           
+          <div>
+          <ul>
+            {this.state.indents}
+          </ul>
+          <ul className="page-numbers">
+            {renderPageNumbers}
+          </ul>
+        </div>
         )
 }
 }

@@ -113,3 +113,44 @@ console.log(typeof(t));
         })
       return;
     }
+
+
+    module.exports.pagination=function(req,res){
+    
+        
+        var p=req.body.data;
+        console.log(p);
+        console.log(typeof(p));
+      
+           var currentpage=p;
+           var imageperpage=3;
+       var indexoflastpage=currentpage*imageperpage;
+       var indexoffirstpage=indexoflastpage-imageperpage;
+       
+       if(indexoffirstpage==0){
+         indexoffirstpage=1;
+       }
+       var query = sticker.find({}).skip(indexoffirstpage-1).limit(3);
+       query.exec(function(err,ans){
+         console.log(ans) ;  //console.log(data)
+  if(err||ans.length==0){
+            res.status(201).json({
+              message: 'error'
+            });
+          }
+          else{
+           console.log(ans.length);
+           
+           
+            res.send({
+              message:"receiving data",
+             
+              data:ans
+            });
+          }
+      
+});
+        
+        
+     
+}
