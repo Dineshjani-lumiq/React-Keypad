@@ -19,11 +19,11 @@ export default class Form extends React.Component {
        
         const value = data.get('image');
         
-        const value1 = data.get('number');
+        const value1 = data.get('name');
     
-  axios.put('http://localhost:4585/update', 
+  axios.put('http://localhost:4123/update', 
          
-  {data:{number:value1,image:value}}
+  {data:{name:value1,image:value}}
   ).then((res)=>{
       console.log(res);
       this.setState({
@@ -48,8 +48,8 @@ export default class Form extends React.Component {
             <div className="form">
                
                <form  onSubmit={this.handleSubmit}>
-        <label className="label"id="name">Enter Number</label>
-        <input className="inputn" id="username" name="number" type="number" />
+        <label className="label"id="name">Enter Name</label>
+        <input className="inputn" id="username" name="name" type="name" />
 
         <label className="label">Enter Image</label>
         <input className="input" id="email" name="image" type="url" />
@@ -57,7 +57,7 @@ export default class Form extends React.Component {
         
         
 
-        <button className="large" variant="default" >Update </button>
+        <button className="large" variant="default" >Update</button>
       </form>
       <h>{this.state.message}</h>
             </div>

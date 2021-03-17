@@ -16,14 +16,13 @@ export default class Routing extends Component {
             <div className="topanv">
             <ul className="App-header"> 
               <li> 
-                <Link to="/">Home</Link> 
+                <Link style={{paddingLeft:8, textDecoration: 'inherit', color: 'inherit'}} to="/">Home</Link> 
               </li> 
-              <li> 
-                <Link to="/add">Add</Link> 
-              </li> 
-             <li><Link to="/list">All List</Link> </li>
-             <li><Link to="/delete">Delete</Link> </li>
-             <li><Link to="/update">Update</Link> </li>
+            
+             <li><Link style={{paddingLeft:8, textDecoration: 'inherit', color: 'inherit'
+   }} to="/list">All List</Link> </li>
+             <li><Link style={{paddingLeft:8,textDecoration: 'inherit', color: 'inherit'}} to="/add">Add</Link> </li>
+
             </ul> 
                <Switch>
 <Route exact path="/"  component={  App} />

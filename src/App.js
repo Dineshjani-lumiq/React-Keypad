@@ -10,66 +10,48 @@ import Name   from   "./components/name";
 
 class App extends Component {
   state={
+    name:"",
     result:"",
     image: "",
-    name:"No Superhero found for this number"
+    name:"No Superhero Image for this number"
   }
   buttonPressed=buttonName=>{
     if(buttonName === "CE"){
       this.backspace()
   }else{
+    console.log(buttonName);
     this.setState({
       result:this.state.result+buttonName
     });
   }
   };
-
-  fetchthis=()=>{
-    var p=this.state.result;
-    /*    yha pe fetch karunga is result ke accoding ki ye id bhejunga or mujhe image url chhaiye */ 
-     axios.post('http://localhost:4585/find',{p})
-      .then(res => {
-       console.log(res);
-       if (res.data.message=="error") {
-          this.setState({
-            image:""
-          });
-        }
-        
       
-        else{
-          var q=res.data.data[0].sticker;
-         
-          this.setState({
-            image:q
-          });
-        }
-
-       
-      })
-      
-
-
-  };
   findname=()=>{
     console.log("request send from frontend");
-    axios.post('http://localhost:4585/findname', 
+    axios.post('http://localhost:4123/findname', 
     {number:this.state.result}
   ).then((res)=>{
-      if(res.data!=-1){
+console.log(res);
+      if(res.data.message!="error"){
+        
         this.setState({
-          name:res.data
-        });
+          
+          
+          name:res.data.data[0].Name,
+          image:res.data.data[0].sticker
+       });
       }
       else{
         this.setState({
+          image:"",
           name:"No Superhero found for this number"
         });
       }
      
   })
-
+  
 }
+
   
 
   backspace = () => {
@@ -86,15 +68,27 @@ class App extends Component {
       <div className="App">
         
         <Output result={this.state.result} />
-        <Send   fetchthis={this.fetchthis}  result={this.state.result}/>
+      
         <Keypad buttonPressed={this.buttonPressed} findname={this.findname}/>
-        <Image  image={this.state.image}/>
+        <br>
+        </br>
+        <br></br>
+        <br>
+        </br>
+        <br></br><br></br><br></br><br></br>
+        <br></br><br></br><br></br><br></br><br></br>
         <br></br>
         <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        
+        <Image  className="1" image={this.state.image}/>
+        
         <br></br>
 
 
-        <Name   name={this.state.name}/>
+        <Name  className="2" name={this.state.name}/>
 
       </div>
     );

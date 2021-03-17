@@ -4,6 +4,10 @@ const moSchema=new mongoose.Schema({
         type:Number,
         required:true
     },
+    name:{
+type:String,
+required:true
+    },
     sticker:
         { type: String, required: true }
     

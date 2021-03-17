@@ -1,20 +1,23 @@
 const sticker = require('../models/models')
-
+var myArray = {1:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoq-8KwQec6KnDmUBfFpne8jXpsIKE87sGvA&usqp=CAU",2:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThb2bhKZo1mc0SloD3nySgMPZIz1ON2d_ejQ&usqp=CAU" ,3:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNv5uuTgKDuryWeUxqRfsBWfC0O-Ddrql31g&usqp=CAU"};
+        
 module.exports.list=function(req,res){     /*  var num=req.body.p;
           console.log(num); */
+      var count=4;
 sticker.find({},function(err,ans){
-    if(err){
+   if(err){
     return  res.send('error in fetching content');}
 
  return res.send(ans);
 
- console.log(typeof(num));
+ console.log(typeof(num)); 
  
- /*
- res.status(200).send({
+ 
+ /*res.status(200).send({
    message:myArray[parseInt(num)]
  });
  */
+ 
  return;
 
 })
@@ -27,8 +30,12 @@ module.exports.add=function(req,res){
   
   myArray[t]=req.body.image;
   */
+ console.log(req.body.name);
+ console.log(typeof(req.body.name));
+ 
   const Sticker = new sticker({
-    id: req.body.number,
+    name: req.body.name,
+    id:6,
     sticker: req.body.image
   });
   Sticker.save().then(
@@ -47,22 +54,25 @@ module.exports.add=function(req,res){
 
 
 module.exports.delete=function(req,res){  
-    console.log(typeof(req.body.number));
-    var p=req.body.number;
-    sticker.find({id:p},function(err,ans){
+
+    console.log(typeof(req.body.name));
+    var p=req.body.name;
+    console.log(p);
+    sticker.find({name:p},function(err,ans){
       
       if(ans.length==0||err){
         res.status(201).json({
           message: 'Not Present in Database'
         });
-      }
+      } 
       else{
-    sticker.deleteMany({id:p},function(err){
+    sticker.deleteMany({name:p},function(err){
       if(err){
         res.status(201).json({
           message: 'error in deleting this id !'
         });}
         else{
+        
           res.status(201).json({
             message: 'deleted successfully!'
           });
@@ -75,19 +85,18 @@ module.exports.delete=function(req,res){
 
 module.exports.put=function(req,res){  
     
-    console.log(req);
-        console.log(typeof(req.body.number));
-        var p=req.body.data.number;
-        var image=req.body.data.image;
-        sticker.find({id:p},function(err,ans){
-          
-          if(ans.length==0||err){
-            res.status(201).json({
-              message: 'Not Present in Database'
+   
+        
+        var p=req.body.name;
+        var image=req.body.image;
+       console.log(p.length);
+       if(p.length==0||image.length==0){
+          res.status(201).json({
+              message: 'insert valid data !'
             });
-          }
-          else{
-            sticker.updateOne({id:p},{$set:{sticker:image}},function(err){
+       }
+       else{
+            sticker.updateMany({ $or: [ { name: p }, { sticker: image } ] },{$set:{sticker:image,name:p}},function(err){
           if(err){
             res.status(201).json({
               message: 'error in updating this id !'
@@ -100,6 +109,7 @@ module.exports.put=function(req,res){
         
         })
       }
-      })
+      
+    
         
 }

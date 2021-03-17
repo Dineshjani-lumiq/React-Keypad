@@ -15,7 +15,7 @@ export default class List extends React.Component {
         const value1 = data.get('number');
         console.log(value1);
  
-        axios.delete('http://localhost:4585/delete', 
+        axios.delete('http://localhost:4123/delete', 
          
         {data:{number:value1}}
         ).then((res)=>{
